@@ -1,21 +1,42 @@
 import java.util.Scanner;
-
-public class Primenumber {
+class NextPrimeNumbers {
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
-        System.out.println("enter ur range");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int num = scanner.nextInt();
+        scanner.close();
 
-        int n = s.nextInt();
-        for (int i = 2; i < n; i++) {
-            int factors = 0;
-            for (int j = 1; j <= i; j++) {
-                if (i % j == 0) {
-                    factors++;
-                }
+        System.out.println(num + " is " + (isPrime(num) ? "prime." : "not prime."));
+
+        int count = 0;
+        int currentNumber = num + 1;
+
+        System.out.println("Next 10 prime numbers from " + num + " are:");
+
+        while (count < 10) {
+            if (isPrime(currentNumber)) {
+                System.out.println(currentNumber);
+                count++;
             }
-            if (factors == 2) {
-                System.out.println(i);
-            }
+            currentNumber++;
         }
     }
+
+    public static boolean isPrime(int n) {
+        if (n <= 1)
+            return false;
+        if (n <= 3)
+            return true;
+        if (n % 2 == 0 || n % 3 == 0)
+            return false;
+
+        for (int i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0)
+                return false;
+        }
+
+        return true;
+    }
 }
+
+
